@@ -1,7 +1,5 @@
 #include <SDL.h>
-#include <math.h>
 #include <stdbool.h>
-#include <stdio.h>
 
 // Window constants
 #define WINDOW_SIZE_X 1280
@@ -15,7 +13,7 @@
 #define PROXIMITY_RANGE 20
 #define VISIBLE_RANGE (PROXIMITY_RANGE + 50)
 #define AVOIDANCE_FACTOR 0.05
-#define MATCHING_FACTOR 0.03
+#define MATCHING_FACTOR 0.2
 #define COHESION_FACTOR 0.001
 #define WINDOW_BOUNDARY 200
 #define BOUNDARY_TURN_FACTOR 0.1
@@ -194,7 +192,7 @@ void draw_boid(Boid_Typedef* boid) {
         // Note: removed first part of these equations as they are always zero
         {.position = {-(v[0].y - boid->p.y) * (float)sin(angle) + boid->p.x,
                       (v[0].y - boid->p.y) * (float)cos(angle) + boid->p.y},
-         .color = {0, 0, 0, 255}},
+         .color = {255, 0, 0, 255}},
         {.position = {(v[1].x - boid->p.x) * (float)cos(angle) -
                           (v[1].y - boid->p.y) * (float)sin(angle) + boid->p.x,
                       (v[1].x - boid->p.x) * (float)sin(angle) +
@@ -204,7 +202,7 @@ void draw_boid(Boid_Typedef* boid) {
                           (v[2].y - boid->p.y) * (float)sin(angle) + boid->p.x,
                       (v[2].x - boid->p.x) * (float)sin(angle) +
                           (v[2].y - boid->p.y) * (float)cos(angle) + boid->p.y},
-         .color = {0, 255, 0, 255}}};
+         .color = {0, 0, 255, 255}}};
 
     SDL_RenderGeometry(renderer, NULL, triangle, 3, NULL, 0);
 }
